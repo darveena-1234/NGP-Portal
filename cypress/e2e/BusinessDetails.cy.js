@@ -1,8 +1,8 @@
-
+import {base_url} from '../fixtures/config'
 
 describe('Business details', function(){ 
   it('Verify Card91 business portal URL is loaded successfully',function(){
-      cy.visit('http://100.91.145.58:3000/login')
+      cy.visit(base_url+'/login')
        })
   /*it('Should check correct url',function(){
       cy.url().should('include','login.in')  
@@ -110,8 +110,7 @@ it('Verify the login button',function(){
   .click();
 })
 })
-//let a="API Key"
-//if(a=="b"){
+
 
 describe('Should fill all admin details', function(){ 
    it('Verify if click admin button',function(){
@@ -127,14 +126,14 @@ describe('Should fill all admin details', function(){
     .should('be.visible')
     .should('be.enabled')
     .should('have.value', 'callingname')
-    cy.get('[id="mobile-number"]').type('6009000901')
+    cy.get('[id="mobile-number"]').type('8701011732')
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6009000901')
-    cy.get('[id="email-address"]').type('6009000901@mailinator.com')
+    .should('have.value', '8701011732')
+    cy.get('[id="email-address"]').type('8701011732@mailinator.com')
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6009000901@mailinator.com')
+    .should('have.value', '8701011732@mailinator.com')
     cy.wait(3000)
     cy.get('[id="superAdminId"]').should('be.checked')
     .should('have.value','SUPER_ADMIN')
@@ -165,9 +164,9 @@ describe('Should fill all admin details', function(){
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      cy.get('[id="adminEmail"]').type('6568382121@mailinator.com')
-      cy.get('[id="adminMobile"]').type('6568382121')
-      cy.get('[id="gst"]').type('22GHGFY0000H1Z2')
+      cy.get('[id="adminEmail"]').type('8001011732@mailinator.com')
+      cy.get('[id="adminMobile"]').type('8001011732')
+      cy.get('[id="gst"]').type('22BQWBV1122H1Z2')
       cy.get('[class="sc-bZkfAO dmiPjz"]').click()
       cy.get('li[class="sc-kgUAyh kWqipL"]').eq(0).click()
       cy.get('[id="addressline1"]').type('123C,New Bus Stand')
@@ -195,6 +194,7 @@ describe('Should fill all admin details', function(){
       cy.get('[class="sc-ikZpkk ikoNXp"]').should('have.text','Enter the name')
       cy.get('[class="sc-gKXOVf pLfFc sc-bUbCnL kHrXFF"]').click()
       cy.wait(3000)
+      
       cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(3).click()
       cy.get('button').contains('Create Webhook').click()
       //validate transaction
@@ -205,25 +205,35 @@ describe('Should fill all admin details', function(){
       cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(3).click()
       cy.get('button').contains('Create Webhook').click()
       cy.get('[id="webhook-url"]').type('https://webhook.site/e60ced54-f74e-40ea-9b32-85db383a91a0')
-      cy.get('[id="createTransaction"]').should('not.be.checked').check().should('have.value','CREATE_TXN')
+      cy.get('[id="createTransaction"]').should('not.be.visible') // Passes
+      .check({ force: true }).should('be.checked').should('have.value','CREATE_TXN')     
+      //cy.get('[id="createTransaction"]').should('not.be.checked').check().should('have.value','CREATE_TXN')
       cy.get('button.etUmhU:nth-child(2)').should('be.enabled').click()
       //CARD EVENTS
       cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(3).click()
       cy.get('button').contains('Create Webhook').click()
       cy.get('[id="webhook-url"]').type('https://webhook.site/e60ced54-f74e-40ea-9b32-85db383a91a0')
-      cy.get('[id="cardEvents"]').should('not.be.checked').check().should('have.value','CARD_EVENTS')
+      cy.get('[id="cardEvents"]').should('not.be.visible') // Passes
+      .check({ force: true }).should('be.checked').should('have.value','CARD_EVENTS')     
+     // cy.get('[id="cardEvents"]').should('not.be.checked').check().should('have.value','CARD_EVENTS')
       cy.get('button.etUmhU:nth-child(2)').should('be.enabled').click()
       //SINGLE SIGN ON
       cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(3).click()
       cy.get('button').contains('Create Webhook').click()
       cy.get('[id="webhook-url"]').type('https://webhook.site/e60ced54-f74e-40ea-9b32-85db383a91a0')
-      cy.get('[id="singleSignOn"]').should('not.be.checked').check().should('have.value','CUSTOMER_AUTH')
+      cy.get('[id="singleSignOn"]').should('not.be.visible') // Passes
+      .check({ force: true }).should('be.checked').should('have.value','CUSTOMER_AUTH')
+      //cy.get('[id="singleSignOn"]').should('not.be.checked').check().should('have.value','CUSTOMER_AUTH')
       cy.get('button.etUmhU:nth-child(2)').should('be.enabled').click()
+      cy.get(':nth-child(1) > .sc-bPyhqo > :nth-child(3) > [data-testid="button"] > .sc-papXJ > svg').click()
+      cy.get('button').contains('Cancel').click()
+      cy.get(':nth-child(1) > .sc-bPyhqo > :nth-child(3) > [data-testid="button"] > .sc-papXJ > svg').click()
+      cy.get('button').contains('Delete Webhook').click()
 
         })
           
          })
-    
+        
   
     /*it('Click sub-business button',function(){
       cy.get('button').contains('Add Sub-business').click()
