@@ -1,3 +1,4 @@
+//import { contains } from 'cypress/types/jquery'
 import {base_url} from '../fixtures/config'
 
 describe('Business details', function(){ 
@@ -11,7 +12,7 @@ describe('Business details', function(){
       cy.get('h1').should('be.visible')
        })
   it('verify the user name text box',function(){
-    cy.get('.sc-gXmSlM').should('have.text', 'Email or Mobile Number')
+    cy.get('.sc-gXmSlM').should('have.text', 'Enter Email address or Mobile number')
   })
   it('Verify if enter invalid username',function(){
       cy.get('#form-field-email-mobile').clear()
@@ -110,7 +111,7 @@ it('Verify the login button',function(){
   .click();
 })
 })
-
+// Admin with input
 
 describe('Should fill all admin details', function(){ 
    it('Verify if click admin button',function(){
@@ -126,14 +127,14 @@ describe('Should fill all admin details', function(){
     .should('be.visible')
     .should('be.enabled')
     .should('have.value', 'callingname')
-    cy.get('[id="mobile-number"]').type('8701011732')
+    cy.get('[id="mobile-number"]').type('8767689007')
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '8701011732')
-    cy.get('[id="email-address"]').type('8701011732@mailinator.com')
+    .should('have.value', '8767689007')
+    cy.get('[id="email-address"]').type('8767689007@mailinator.com')
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '8701011732@mailinator.com')
+    .should('have.value', '8767689007@mailinator.com')
     cy.wait(3000)
     cy.get('[id="superAdminId"]').should('be.checked')
     .should('have.value','SUPER_ADMIN')
@@ -144,7 +145,9 @@ describe('Should fill all admin details', function(){
     cy.get('[id="developerAdminId"]').should('not.be.checked')
     .should('have.value','DEVELOPER_ADMIN')
     cy.get('button.etUmhU:nth-child(2) > div:nth-child(1)')
-    .should('have.text','Invite Admin').click({force:true})
+    .should('have.text','Invite Admin').click({force:true}) 
+
+    // Admin without input
     cy.get('button').contains('Invite Admin').click()
     cy.get('button.etUmhU:nth-child(2) > div:nth-child(1)')
     .should('have.text','Invite Admin').click({force:true})
@@ -153,8 +156,10 @@ describe('Should fill all admin details', function(){
     cy.get('[class="sc-ikZpkk ikoNXp"]').eq(2).should('have.text','Enter the mobile number')
     cy.get('button').contains('Cancel').click()
     cy.wait(3000)
+
+    // Sub business with input
     cy.get('button').contains('Sub Business').click()
-      cy.get('button').contains('Add Sub-business').click()
+      cy.get('button').contains('Add Sub-business').eq(0).click()
       cy.get('[id="businessName"]').type('Sub business')
       .should('be.visible')
       .should('be.enabled')
@@ -164,9 +169,9 @@ describe('Should fill all admin details', function(){
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      cy.get('[id="adminEmail"]').type('8001011732@mailinator.com')
-      cy.get('[id="adminMobile"]').type('8001011732')
-      cy.get('[id="gst"]').type('22BQWBV1122H1Z2')
+      cy.get('[id="adminEmail"]').type('8767680007@mailinator.com')
+      cy.get('[id="adminMobile"]').type('8767680007')
+      cy.get('[id="gst"]').type('22VCFRN0007J1Z2')
       cy.get('[class="sc-bZkfAO dmiPjz"]').click()
       cy.get('li[class="sc-kgUAyh kWqipL"]').eq(0).click()
       cy.get('[id="addressline1"]').type('123C,New Bus Stand')
@@ -175,7 +180,23 @@ describe('Should fill all admin details', function(){
       cy.get('[id="pincode"]').type('614804')
       cy.get('[id="city"]').type('Chennai')
       cy.get('[id="state"]').type('Tamilnadu')
-      cy.get('.bfmTRx > button:nth-child(2) > div').eq(1).click({force:true})
+      cy.get('.bfmTRx > button:nth-child(2) > div:nth-child(1)').click()//Add sub business button with input
+
+      // Sub-business without input
+      cy.get('button').contains('Add Sub-business').click()
+      cy.get('.bfmTRx > button:nth-child(2) > div:nth-child(1)').click()//Add sub business button without input
+    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(0).should('have.text','Enter a valid Sub-business name')
+    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(1).should('have.text','Enter a Description in 10-500 characters')
+    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(2).should('have.text','Enter a valid Primary Contact Name')
+    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(3).should('have.text','Enter a valid Phone Number')
+    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(4).should('have.text','Select a Parent Business')
+    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(5).should('have.text','Enter a valid address between 3-46 characters')
+    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(6).should('have.text','Enter a valid PIN code')
+    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(7).should('have.text','Enter a City name')
+    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(8).should('have.text','Enter a State name')
+    cy.get('button').contains('Cancel').click()*/
+
+    //API Admin WITH INPUT
       cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(2).click()
       cy.get('button').contains('Create Key').click()
       cy.get('[id="keyName"]').type('SuperAdminKey')
@@ -188,7 +209,9 @@ describe('Should fill all admin details', function(){
       .should('not.be.checked').should('have.value','READ_ONLY_ADMIN')
       cy.get('button').contains('Generate Key').click()
       cy.get('[class="sc-gKXOVf pLfFc sc-bUbCnL kHrXFF"]').click()
-      cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(2).click()
+ 
+       //API Admin WITHOUT INPUT
+       cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(2).click()
       cy.get('button').contains('Create Key').click()
       cy.get('button').contains('Generate Key').click()
       cy.get('[class="sc-ikZpkk ikoNXp"]').should('have.text','Enter the name')
@@ -227,12 +250,15 @@ describe('Should fill all admin details', function(){
       cy.get('button.etUmhU:nth-child(2)').should('be.enabled').click()
       cy.get(':nth-child(1) > .sc-bPyhqo > :nth-child(3) > [data-testid="button"] > .sc-papXJ > svg').click()
       cy.get('button').contains('Cancel').click()
+
+
+      //Delete webhook
       cy.get(':nth-child(1) > .sc-bPyhqo > :nth-child(3) > [data-testid="button"] > .sc-papXJ > svg').click()
       cy.get('button').contains('Delete Webhook').click()
 
         })
           
-         })
+      })
         
   
     /*it('Click sub-business button',function(){
