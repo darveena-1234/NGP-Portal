@@ -3,8 +3,7 @@ import {base_url} from '../fixtures/config'
 
 describe('Business details', function(){ 
   it('Verify Card91 business portal URL is loaded successfully',function(){
-      cy.visit(base_url+'/login')
-       })
+      cy.visit(base_url+'/login')})
   /*it('Should check correct url',function(){
       cy.url().should('include','login.in')  
        }) */
@@ -110,42 +109,75 @@ it('Verify the login button',function(){
   .should('be.visible').eq(0)
   .click();
 })
+
+it('Test 5 - Checking all the links on the homepage are working', () => {
+
+  //Visits the homepage and checks all the valid links one by one using API call and gets their status code as 200 which means success
+
+  cy.get('a').eq[1]
+  .each(($a) => {
+      console.log('$a', $a);
+      const href = $a.prop('href');
+      console.log('href', href)
+      if(href==="" || href.includes('business') || href.includes('javascript')){ //skipping all the invalid links with null, javascript void or LinkedIn (LinkedIn does not allow automated checking)
+          return;
+      }
+      cy.request(encodeURI(href), function (error, response, body) {
+          return response.statusCode.then(function (code) {
+              if(code == 404){
+                  throw new Error('whoops! broken link', href);
+              }
+              expect(code).to.eq(200);
+          })
+      })
+  })
 })
-// Admin with input
+
+})// Admin with input
 
 describe('Should fill all admin details', function(){ 
+
+
+  // Add Admin
    it('Verify if click admin button',function(){
     cy.wait(2000)
     cy.get('button').contains('Invite Admin').click()
     //cy.wait(3000)
-    cy.get('[class="sc-bZkfAO chsjhJ"]').eq(0).type('AdminName')
+    cy.get('[class="sc-bZkfAO chsjhJ"]').eq(0).type('AdminName') // Admin Name
     .should('be.visible')
     .should('be.enabled')
     .should('have.value', 'AdminName')
     
-    cy.get('[class="sc-bZkfAO chsjhJ"]').eq(1).type('callingname')
+    cy.get('[class="sc-bZkfAO chsjhJ"]').eq(1).type('callingname') // Calling name
     .should('be.visible')
     .should('be.enabled')
     .should('have.value', 'callingname')
-    cy.get('[id="mobile-number"]').type('8767689007')
+
+    cy.get('[id="mobile-number"]').type('6000687878') // Mobile number
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '8767689007')
-    cy.get('[id="email-address"]').type('8767689007@mailinator.com')
+    .should('have.value', '6000687878')
+
+    cy.get('[id="email-address"]').type('6000687878@mailinator.com') // Email Address
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '8767689007@mailinator.com')
+    .should('have.value', '6000687878@mailinator.com')
     cy.wait(3000)
-    cy.get('[id="superAdminId"]').should('be.checked')
+
+    cy.get('[id="superAdminId"]').should('be.checked') // Super Admin Check Box
     .should('have.value','SUPER_ADMIN')
-    cy.get('[id="cardAdminId"]').should('not.be.checked')
+
+    cy.get('[id="cardAdminId"]').should('not.be.checked') // Card Admin Check Box
     .should('have.value','CARD_ADMIN')
-    cy.get('[id="readOnlyId"]').should('not.be.checked')
+
+    cy.get('[id="readOnlyId"]').should('not.be.checked') // RO Admin Check Box
     .should('have.value','READ_ONLY_ADMIN')
-    cy.get('[id="developerAdminId"]').should('not.be.checked')
+
+    cy.get('[id="developerAdminId"]').should('not.be.checked')  // Dev Admin Check Box
     .should('have.value','DEVELOPER_ADMIN')
+
     cy.get('button.etUmhU:nth-child(2) > div:nth-child(1)')
-    .should('have.text','Invite Admin').click({force:true}) 
+    .should('have.text','Invite Admin').click({force:true}) // Submit button
 
     // Admin without input
     cy.get('button').contains('Invite Admin').click()
@@ -154,12 +186,15 @@ describe('Should fill all admin details', function(){
     cy.get('[class="sc-ikZpkk ikoNXp"]').eq(0).should('have.text','Enter full name')
     cy.get('[class="sc-ikZpkk ikoNXp"]').eq(1).should('have.text','Enter calling name')
     cy.get('[class="sc-ikZpkk ikoNXp"]').eq(2).should('have.text','Enter the mobile number')
-    cy.get('button').contains('Cancel').click()
+
+
+    cy.get('button').contains('Cancel').click() //  Cancel button
     cy.wait(3000)
 
     // Sub business with input
-    cy.get('button').contains('Sub Business').click()
-      cy.get('button').contains('Add Sub-business').eq(0).click()
+    cy.get('button').contains('Sub Business').click() // Sub business button
+
+      cy.get('button').contains('Add Sub-business').eq(0).click() // Add sub- business button
       cy.get('[id="businessName"]').type('Sub business')
       .should('be.visible')
       .should('be.enabled')
@@ -169,9 +204,9 @@ describe('Should fill all admin details', function(){
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      cy.get('[id="adminEmail"]').type('8767680007@mailinator.com')
-      cy.get('[id="adminMobile"]').type('8767680007')
-      cy.get('[id="gst"]').type('22VCFRN0007J1Z2')
+      cy.get('[id="adminEmail"]').type('6110687878@mailinator.com')
+      cy.get('[id="adminMobile"]').type('6110687878')
+      cy.get('[id="gst"]').type('22BXSVN1111J1Z2')
       cy.get('[class="sc-bZkfAO dmiPjz"]').click()
       cy.get('li[class="sc-kgUAyh kWqipL"]').eq(0).click()
       cy.get('[id="addressline1"]').type('123C,New Bus Stand')
@@ -194,7 +229,7 @@ describe('Should fill all admin details', function(){
     cy.get('[class="sc-ikZpkk ikoNXp"]').eq(6).should('have.text','Enter a valid PIN code')
     cy.get('[class="sc-ikZpkk ikoNXp"]').eq(7).should('have.text','Enter a City name')
     cy.get('[class="sc-ikZpkk ikoNXp"]').eq(8).should('have.text','Enter a State name')
-    cy.get('button').contains('Cancel').click()*/
+    cy.get('button').contains('Cancel').click()
 
     //API Admin WITH INPUT
       cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(2).click()
@@ -248,6 +283,8 @@ describe('Should fill all admin details', function(){
       .check({ force: true }).should('be.checked').should('have.value','CUSTOMER_AUTH')
       //cy.get('[id="singleSignOn"]').should('not.be.checked').check().should('have.value','CUSTOMER_AUTH')
       cy.get('button.etUmhU:nth-child(2)').should('be.enabled').click()
+
+      //Check Cancel button
       cy.get(':nth-child(1) > .sc-bPyhqo > :nth-child(3) > [data-testid="button"] > .sc-papXJ > svg').click()
       cy.get('button').contains('Cancel').click()
 
