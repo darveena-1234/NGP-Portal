@@ -24,7 +24,3 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     debugger
     return false
 })
-
-Cypress.on('fail', (err) => {
-    debugger
-})

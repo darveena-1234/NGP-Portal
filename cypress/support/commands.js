@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-const cypress = require("cypress");
+//const cypress = require("cypress");
 
 cypress.commands.add('setResolution',size=>{
     if(cypress._.isArray(size)){
@@ -34,7 +34,7 @@ cypress.commands.add('setResolution',size=>{
     }
 })
 cypress.commands.add('login',(username,password)=>{
-    cy.get('#form-field-email-mobile').clear()
+    cy.get('#form-field-email-mobile')
     .type('testuser123@mailinator')
     cy.get('#form-field-password').type('Test@1234')
     cy.get('[data-testid="button"]').eq(0).click()
