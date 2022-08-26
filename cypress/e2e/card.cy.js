@@ -129,7 +129,7 @@ describe('Business details', function(){
     //Click load fund button with amount
     cy.get('.gSoJhY').click({force:true});
     cy.get('[class="sc-kDDrLX hxMGbH"]').should('have.text','✓  Money loaded')
-    cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','Limit for loading money is exceeded')
+    cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','Org balance is insufficient for loading money to card')
     cy.get('button.LjYDp:nth-child(4) > div:nth-child(1) > svg').click()
 
     //Load fund with no amount
