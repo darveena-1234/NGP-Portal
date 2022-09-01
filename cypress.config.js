@@ -24,7 +24,7 @@ module.exports = defineConfig({
           const { data } = await axios.post(`${testDataApiEndpoint}/seed`)
           return data
         },
-      baseUrl: 'http://100.91.145.58:3000'
+      baseUrl: 'https://dawn.sb.stag.card91.in'
     })
   }
 }

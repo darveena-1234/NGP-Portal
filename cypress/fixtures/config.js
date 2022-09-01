@@ -1,1 +1,1 @@
-export const base_url='http://100.91.145.58:3000'
+export const base_url='https://dawn.sb.stag.card91.in'
