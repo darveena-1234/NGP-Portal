@@ -149,8 +149,8 @@ it('Verify the login button',function(){
 
   // Add Admin
    it('Verify if click admin button',function(){
-    cy.scrollTo(bottomLeft)
-    cy.get('button').contains('Invite Admin').click()
+    cy.wait(3000)
+    cy.get('button').contains('Invite Admin').click({force:true})
     //cy.wait(3000)
     cy.get('[id="full-name"]').type('AdminName') // Admin Name
     .should('be.visible')
@@ -162,15 +162,15 @@ it('Verify the login button',function(){
     .should('be.enabled')
     .should('have.value', 'callingname')
 
-    cy.get('[id="mobile-number"]').type('6435120014') // Mobile number
+    cy.get('[id="mobile-number"]').type('8930020014') // Mobile number
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6435120014')
+    .should('have.value', '8930020014')
 
-    cy.get('[id="email-address"]').type('6435120014@mailinator.com') // Email Address
+    cy.get('[id="email-address"]').type('8930020014@mailinator.com') // Email Address
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6435120014@mailinator.com')
+    .should('have.value', '8930020014@mailinator.com')
     cy.wait(3000)
 
     cy.get('[id="superAdminId"]').should('be.checked') // Super Admin Check Box
@@ -191,8 +191,7 @@ it('Verify the login button',function(){
     cy.wait(2000)
     // Admin without input
     cy.get('button').contains('Invite Admin').click()
-    cy.get('button.etUmhU:nth-child(2) > div:nth-child(1)')
-    .should('have.text','Invite Admin').click({force:true})
+    cy.get('#radix-\:rf\: > div > div.sc-eKBdFk.kIqOSm > div > button.sc-gKXOVf.gSoJhY > div.sc-papXJ.dcCGwG').click({force:true})
 
     cy.get('#inviteAdminForm > div:nth-child(1) > div:nth-child(2) > p:nth-child(1)').should('have.text','Enter full name')
     cy.get('#inviteAdminForm > div:nth-child(2) > div:nth-child(2) > p').should('have.text','Enter calling name')
