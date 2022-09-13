@@ -120,7 +120,24 @@ it('Verify the login button',function(){
   .click();
 })
 
-/*it('Test 5 - Checking all the links on the homepage are working', () => {
+/*it('Navigate through the links using loops', () => {
+  cy.wait(5000);
+  const pages = ['business', 'cards', 'accounts', 'cardprogram']
+  
+  cy.visit(base_url+'/')
+ 
+  pages.forEach(href => {
+ 
+    cy.contains(href).click()
+    cy.location('pathname').should('eq', `/${href}`)
+    cy.go('back')
+ 
+  })
+ 
+})
+
+it('Test 5 - Checking all the links on the homepage are working', () => {
+  
 
   //Visits the homepage and checks all the valid links one by one using API call and gets their status code as 200 which means success
 
@@ -129,7 +146,7 @@ it('Verify the login button',function(){
       console.log('$a', $a);
       const href = $a.prop('href');
       console.log('href', href)
-      if(href==="" || href.includes('business') || href.includes('javascript')){ //skipping all the invalid links with null
+      if(href==="" || href.includes('/cards') || href.includes('javascript')){ //skipping all the invalid links with null
           return;
       }
       cy.request(encodeURI(href), function (error, response, body) {
@@ -162,15 +179,15 @@ it('Verify the login button',function(){
     .should('be.enabled')
     .should('have.value', 'callingname')
 
-    cy.get('[id="mobile-number"]').type('6177766979') // Mobile number
+    cy.get('[id="mobile-number"]').type('6177006979') // Mobile number
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6177766979')
+    .should('have.value', '6177006979')
 
-    cy.get('[id="email-address"]').type('6177766979@mailinator.com') // Email Address
+    cy.get('[id="email-address"]').type('6177006979@mailinator.com') // Email Address
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6177766979@mailinator.com')
+    .should('have.value', '6177006979@mailinator.com')
     cy.wait(3000)
 
     cy.get('[id="superAdminId"]').should('be.checked') // Super Admin Check Box
@@ -219,9 +236,9 @@ it('Verify the login button',function(){
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      cy.get('[id="adminEmail"]').type('7110012070@mailinator.com')
-      cy.get('[id="adminMobile"]').type('7110012070')
-      cy.get('[id="gst"]').type('22ZQORE0270H1Z2')
+      cy.get('[id="adminEmail"]').type('7115656070@mailinator.com')
+      cy.get('[id="adminMobile"]').type('7115656070')
+      cy.get('[id="gst"]').type('22ZQORE5667H1Z2')
       cy.wait(3000)
       cy.get('[class="sc-gicCDI kfezDX"]').click()
       cy.get('li[class="sc-cOFTSb dRVokV"]').eq(0).click()
@@ -337,9 +354,10 @@ it('Verify the login button',function(){
       .check({ force: true }).should('be.checked').should('have.value','KYC_EVENTS')
        cy.get('button.dFzDzx:nth-child(2)').should('be.enabled').click()
 
-      //Webhook witout input
-      cy.get('button.dFzDzx:nth-child(2))').should('be.enabled').click()
+      //Webhook without input
+      cy.get('button.dFzDzx:nth-child(2)').should('be.enabled').click()
       cy.get('[class="sc-bZkfAO fIdmrO"]').eq(10).should('have.text','Enter URL')
+      
       //Check Cancel button
       cy.get(':nth-child(1) > .sc-bPyhqo > :nth-child(3) > [data-testid="button"] > .sc-papXJ > svg').click()
       cy.get('button').contains('Cancel').click()
