@@ -1,4 +1,5 @@
 //import { contains } from 'cypress/types/jquery'
+import { eq } from 'lodash'
 import {base_url} from '../fixtures/config'
 
 describe('Business details', function(){ 
@@ -167,7 +168,7 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
   // Add Admin
    it('Verify if click admin button',function(){
     cy.wait(3000)
-    cy.get('button').contains('Invite Admin').click({force:true})
+    /*cy.get('button').contains('Invite Admin').click({force:true})
     //cy.wait(3000)
     cy.get('[id="full-name"]').type('AdminName') // Admin Name
     .should('be.visible')
@@ -179,15 +180,15 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
     .should('be.enabled')
     .should('have.value', 'callingname')
 
-    cy.get('[id="mobile-number"]').type('6177006979') // Mobile number
+    cy.get('[id="mobile-number"]').type('6923602979') // Mobile number
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6177006979')
+    .should('have.value', '6923602979')
 
-    cy.get('[id="email-address"]').type('6177006979@mailinator.com') // Email Address
+    cy.get('[id="email-address"]').type('6923602979@mailinator.com') // Email Address
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6177006979@mailinator.com')
+    .should('have.value', '6923602979@mailinator.com')
     cy.wait(3000)
 
     cy.get('[id="superAdminId"]').should('be.checked') // Super Admin Check Box
@@ -236,9 +237,9 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      cy.get('[id="adminEmail"]').type('7115656070@mailinator.com')
-      cy.get('[id="adminMobile"]').type('7115656070')
-      cy.get('[id="gst"]').type('22ZQORE5667H1Z2')
+      cy.get('[id="adminEmail"]').type('6000978787@mailinator.com')
+      cy.get('[id="adminMobile"]').type('6000978787')
+      cy.get('[id="gst"]').type('22BVFRE6777H1Z2')
       cy.wait(3000)
       cy.get('[class="sc-gicCDI kfezDX"]').click()
       cy.get('li[class="sc-cOFTSb dRVokV"]').eq(0).click()
@@ -289,7 +290,7 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       .should('not.be.checked').should('have.value','READ_ONLY_ADMIN')
       cy.get('button').contains('Generate Key').click()
       cy.wait(3000)
-      cy.get('.LjYDp').click()
+      cy.get('.LjYDp').click()*/
  
       
       //API Admin WITHOUT INPUT
@@ -300,13 +301,22 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       cy.get('.LjYDp').click()
       cy.wait(3000)
 
+      //Delete Api admin--//Cancel button
+      cy.get('button').contains('Delete').click()
+      cy.get('button').contains('Cancel').click()
+
+      //Cancel
+      cy.get('button').contains('Delete').click()
+      cy.get('[class="sc-gKXOVf ibLGgv"]').click()
+      
+
       //Webhooks With input
-      cy.get('button').contains('Webhooks').click()
+      /*cy.get('button').contains('Webhooks').click()
       cy.get('button').contains('Create Webhook').click()
      
      
       //validate transaction
-      cy.get('[id="webhook-url"]').type('https://webhook.site/e60ced54-f74e-40ea-9b32-85db383a91a0')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
       cy.get('[id="validateTransaction"]').should('be.checked').should('have.value','VALIDATE_TXN')
       cy.get('button.dFzDzx:nth-child(2)').should('be.enabled').click()
       
@@ -315,7 +325,7 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       //Create transaction
      
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/e60ced54-f74e-40ea-9b32-85db383a91a0')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
       cy.get('[id="createTransaction"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','CREATE_TXN')     
       
@@ -327,7 +337,7 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       //CARD EVENTS
       
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/e60ced54-f74e-40ea-9b32-85db383a91a0')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
       cy.get('[id="cardEvents"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','CARD_EVENTS')     
     
@@ -339,7 +349,7 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       //SINGLE SIGN ON
       
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/e60ced54-f74e-40ea-9b32-85db383a91a0')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
       cy.get('[id="singleSignOn"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','CUSTOMER_AUTH')
       
@@ -349,30 +359,49 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
 
       //kyc-events
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/e60ced54-f74e-40ea-9b32-85db383a91a0')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
       cy.get('[id="kycEvents"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','KYC_EVENTS')
        cy.get('button.dFzDzx:nth-child(2)').should('be.enabled').click()
 
       //Webhook without input
+      cy.get('button').contains('Create Webhook').click()
       cy.get('button.dFzDzx:nth-child(2)').should('be.enabled').click()
-      cy.get('[class="sc-bZkfAO fIdmrO"]').eq(10).should('have.text','Enter URL')
+      cy.wait(3000)
+      cy.get('.sc-bZkfAO').should('be.visible').should('have.text','Enter URL')
+      
       
       //Check Cancel button
-      cy.get(':nth-child(1) > .sc-bPyhqo > :nth-child(3) > [data-testid="button"] > .sc-papXJ > svg').click()
+      //cy.get('.kzcTGx > div').click({force:true})
       cy.get('button').contains('Cancel').click()
+      cy.wait(3000)
 
 
+      //Delete Icon webhook
+      cy.get('[class="sc-gKXOVf bgdjeH"]').eq(1).click()
+      //Cancel Webhook
+      cy.get('button').contains('Cancel').click()
       //Delete webhook
-      cy.get(':nth-child(1) > .sc-bPyhqo > :nth-child(3) > [data-testid="button"] > .sc-papXJ > svg').click()
+      cy.get('[class="sc-gKXOVf bgdjeH"]').eq(1).click()
       cy.get('button').contains('Delete Webhook').click()
 
-      //Test Webhook
-      cy.get('div.sc-dWINGa:nth-child(1) > div:nth-child(1) > div:nth-child(3) > button:nth-child(1) > div:nth-child(1)').click()
-      cy.get('button.etUmhU:nth-child(2) > div').eq(0).click()
+      //Test Webhook Test Webhook
+      cy.get('button').contains('Test Webhook').eq(0).click()
+      cy.wait(3000)
+      cy.get('[class="sc-jqUVSM fFzWLA"]').eq(22).click({force:true})
+      cy.get('[class="sc-c1597a2b-0 jfBmXe"]').should('have.text','{"webhookStatusCode":200,"webhookResponseMessage":"OK"}')
 
       //Close webhook page
-      cy.get('.pLfFc > div:nth-child(1) > svg:nth-child(1)').click()
+      cy.get('[class="sc-gKXOVf LjYDp sc-hlnMnd fFJgHU"]').click()
+     
+
+      //Edit Webhook   //Cancel edit
+      cy.get('[class="sc-gKXOVf iFGgOF showOnHover"]').eq(2).click()
+      cy.get('[class="sc-gKXOVf fovrAL"]').click({force:true})
+
+      //Submit edit
+      cy.get('[class="sc-gKXOVf iFGgOF showOnHover"]').eq(2).click()
+      cy.get('[type="submit"]').click()*/
 
         })
           
