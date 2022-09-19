@@ -167,8 +167,8 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
 
   // Add Admin
    it('Verify if click admin button',function(){
-    cy.wait(3000)
-    /*cy.get('button').contains('Invite Admin').click({force:true})
+   cy.wait(3000)
+    cy.get('button').contains('Invite Admin').click({force:true})
     //cy.wait(3000)
     cy.get('[id="full-name"]').type('AdminName') // Admin Name
     .should('be.visible')
@@ -180,15 +180,15 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
     .should('be.enabled')
     .should('have.value', 'callingname')
 
-    cy.get('[id="mobile-number"]').type('6923602979') // Mobile number
+    cy.get('[id="mobile-number"]').type('6023002979') // Mobile number
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6923602979')
+    .should('have.value', '6023002979')
 
-    cy.get('[id="email-address"]').type('6923602979@mailinator.com') // Email Address
+    cy.get('[id="email-address"]').type('6023002979@mailinator.com') // Email Address
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6923602979@mailinator.com')
+    .should('have.value', '6023002979@mailinator.com')
     cy.wait(3000)
 
     cy.get('[id="superAdminId"]').should('be.checked') // Super Admin Check Box
@@ -237,9 +237,9 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      cy.get('[id="adminEmail"]').type('6000978787@mailinator.com')
-      cy.get('[id="adminMobile"]').type('6000978787')
-      cy.get('[id="gst"]').type('22BVFRE6777H1Z2')
+      cy.get('[id="adminEmail"]').type('6011108787@mailinator.com')
+      cy.get('[id="adminMobile"]').type('6011108787')
+      cy.get('[id="gst"]').type('22BVXRE6077H1Z2')
       cy.wait(3000)
       cy.get('[class="sc-gicCDI kfezDX"]').click()
       cy.get('li[class="sc-cOFTSb dRVokV"]').eq(0).click()
@@ -252,6 +252,7 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       cy.get('.bfmTRx > button:nth-child(2) > div:nth-child(1)').click()//Add sub business button with input
 
     // Sub-business without input
+    
     cy.get('button').contains('Add Sub-business').click()
     cy.get('.bfmTRx > button:nth-child(2) > div:nth-child(1)').click()//Add sub business button without input
     cy.get('[class="sc-bZkfAO fIdmrO"]').eq(0).should('have.text','Enter a valid Sub-business name')
@@ -275,10 +276,30 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
     cy.get('button').contains('Cancel').click()
     cy.wait(3000)
 
-    cy.get('button').contains('Admins').click()
+    // Allocate Money
+    cy.wait(3000)
+    cy.get('button').contains('Sub Business').click() 
+    cy.get('button').contains('Allocate Money').click()
+    cy.wait(2000)
+    cy.get('[class="sc-gicCDI kfezDX"]').click()
+    cy.get('[class="sc-gicCDI kfezDX"]').type('sub')
+    cy.get('[role="option"]').eq(0).click()
+    cy.get('button').contains('Remove').click()
+    cy.get('[placeholder="Enter amount"]').type('10')
+    cy.get('.gSoJhY').click()
 
-     //API Admin WITH INPUT
-     cy.get('button').contains('API Keys').click()
+    //Get Sub-business details
+    cy.get('[class="sc-papXJ dcCGwG"]').eq(10).click()
+    //Add money to sub-business
+    cy.get('.LjYDp > div:nth-child(1) > svg').click()
+    //Search sub-business
+    cy.get('[id="searchBusiness"]').click()
+    cy.get('[id="searchBusiness"]').type('abcde')
+    
+
+    //API Admin WITH INPUT 
+    cy.get('button').contains('Admins').click()
+    cy.get('button').contains('API Keys').click()
       cy.get('button').contains('Create Key').click()
       cy.get('[id="keyName"]').type('SuperAdminKey')
       cy.wait(3000)
@@ -290,7 +311,7 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       .should('not.be.checked').should('have.value','READ_ONLY_ADMIN')
       cy.get('button').contains('Generate Key').click()
       cy.wait(3000)
-      cy.get('.LjYDp').click()*/
+      cy.get('.LjYDp').click()
  
       
       //API Admin WITHOUT INPUT
@@ -311,7 +332,7 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       
 
       //Webhooks With input
-      /*cy.get('button').contains('Webhooks').click()
+      cy.get('button').contains('Webhooks').click()
       cy.get('button').contains('Create Webhook').click()
      
      
@@ -401,7 +422,18 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
 
       //Submit edit
       cy.get('[class="sc-gKXOVf iFGgOF showOnHover"]').eq(2).click()
-      cy.get('[type="submit"]').click()*/
+      cy.get('[type="submit"]').click()
+
+      //Add Money
+      cy.get('[class="sc-bczRLJ dQKGQd"]').eq(0).click({force:true});
+      cy.get('button').contains('Add Money').click()
+      cy.get('[id="amount"]').eq(0).type('100')
+      cy.get('[id="utrNumber"]').type('XXXXR520190109599036XX')
+      cy.get('[class="sc-bczRLJ esGJdo"]').eq(2).click()
+      cy.get('button').contains('19').click()
+      cy.wait(2000)
+      cy.get('.gSoJhY > div').eq(0).click()
+      cy.get('.behARt').should('be.visible').should('have.text','Your request is received, need to be approved by finance admin')
 
         })
           
