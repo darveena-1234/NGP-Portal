@@ -2,7 +2,7 @@
 import { eq } from 'lodash'
 import {base_url} from '../fixtures/config'
 
-describe('Business details', function(){ 
+describe('NGP Portal', function(){ 
   it('Verify Card91 business portal URL is loaded successfully',function(){
       cy.visit(base_url+'/login')})
   /*it('Should check correct url',function(){
@@ -120,6 +120,7 @@ it('Verify the login button',function(){
   .should('be.visible')
   .click();
 })
+})
 
 /*it('Navigate through the links using loops', () => {
   cy.wait(5000);
@@ -162,11 +163,11 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
   cy.resetDb;
 })*/
 // Admin with input
-//describe('Should fill all admin details', function(){ 
+describe('Should fill all details', function(){ 
 
 
   // Add Admin
-   it('Verify if click admin button',function(){
+   it('Admin Tets cases',function(){
    cy.wait(3000)
     cy.get('button').contains('Invite Admin').click({force:true})
     //cy.wait(3000)
@@ -180,15 +181,15 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
     .should('be.enabled')
     .should('have.value', 'callingname')
 
-    cy.get('[id="mobile-number"]').type('6023002979') // Mobile number
+    cy.get('[id="mobile-number"]').type('9363887878') // Mobile number
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6023002979')
+    .should('have.value', '9363887878')
 
-    cy.get('[id="email-address"]').type('6023002979@mailinator.com') // Email Address
+    cy.get('[id="email-address"]').type('9363887878@mailinator.com') // Email Address
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '6023002979@mailinator.com')
+    .should('have.value', '9363887878@mailinator.com')
     cy.wait(3000)
 
     cy.get('[id="superAdminId"]').should('be.checked') // Super Admin Check Box
@@ -237,9 +238,9 @@ it('Test 5 - Checking all the links on the homepage are working', () => {
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      cy.get('[id="adminEmail"]').type('6011108787@mailinator.com')
-      cy.get('[id="adminMobile"]').type('6011108787')
-      cy.get('[id="gst"]').type('22BVXRE6077H1Z2')
+      cy.get('[id="adminEmail"]').type('6011565787@mailinator.com')
+      cy.get('[id="adminMobile"]').type('6011565787')
+      cy.get('[id="gst"]').type('22VCDFH6077H1Z2')
       cy.wait(3000)
       cy.get('[class="sc-gicCDI kfezDX"]').click()
       cy.get('li[class="sc-cOFTSb dRVokV"]').eq(0).click()
