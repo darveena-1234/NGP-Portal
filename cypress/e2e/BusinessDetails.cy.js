@@ -301,12 +301,12 @@ describe('Should fill all details', function(){
     //API Admin WITH INPUT 
     cy.get('button').contains('Admins').click()
     cy.get('button').contains('API Keys').click()
-      cy.get('button').contains('Create Key').click()
-      cy.get('[id="keyName"]').type('SuperAdminKey')
-      cy.wait(3000)
-      cy.get('[id="superAdminId"]')
-      .should('be.checked').should('have.value','SUPER_ADMIN')
-      cy.get('[id="cardAdminId"]')
+    cy.get('button').contains('Create Key').click()
+    cy.get('[id="keyName"]').type('SuperAdminKey')
+    cy.wait(3000)
+    cy.get('[id="superAdminId"]')
+    .should('be.checked').should('have.value','SUPER_ADMIN')
+    cy.get('[id="cardAdminId"]')
       .should('not.be.checked').should('have.value','CARD_ADMIN')
       cy.get('[id="readOnlyId"]')
       .should('not.be.checked').should('have.value','READ_ONLY_ADMIN')
@@ -436,136 +436,173 @@ describe('Should fill all details', function(){
       cy.get('.gSoJhY > div').eq(0).click()
       cy.get('.behARt').should('be.visible').should('have.text','Your request is received, need to be approved by finance admin')
 
-        })
-          
-      })
+      //Cards
+      cy.wait(3000)
+
+    //Click Card icon
+     cy.get('li.sc-brCFrO:nth-child(1) > div:nth-child(1) > span:nth-child(1) > svg').click()
+
+     //Create New CARD
+     cy.wait(3000)
+     cy.get('button').contains('New Card').click()
+     //CardHolder name
+     cy.get('[id="fullName"]').type('TestCard')
+     // Name On card
+     cy.get('[id="nameOnCard"]').type('Cardname')
+     //Mobile number
+     cy.get('[id="mobile"]').type('8378780090')
+     //Email
+     cy.get('[id="email"]').type('email@yahoo.com')
+
+     //Select business
+
+     cy.get('#downshift-20-toggle-button').click()
+     cy.get('#downshift-20-item-0').click()
+
+     //Select cardProgram
+     cy.get('#downshift-21-toggle-button').click()
+     cy.get('#downshift-21-item-0').click()
+
+     // Enter WALLET Initial amount
+
+     cy.get('[class="sc-gicCDI iroSWH"]').eq(0).type('10')
+     cy.get('[class="sc-gicCDI iroSWH"]').eq(1).type('10')
+
+     // Address
+
+     cy.get('[id="address.address1"]').type('123A,New Bus Stand')
+     cy.get('[id="address.address2"]').type('Thanjavur')
+     cy.get('[id="address.pincode"]').type('614804')
+     cy.get('[id="address.city"]').type('Chennai')
+     cy.get('[id="address.state"]').type('Tamilnadu')
+     cy.get('button').contains('Issue Card').click()
+    cy.get('.LjYDp > div:nth-child(1) > svg').click()
+    cy.reload()
+    cy.get('[id="searchCards"]').type('7010425866{enter}')//Mobile number with valid details
+    cy.get('[id="searchCards"]').clear()
+    cy.get('[id="searchCards"]').type('7010425860{enter}')//Mobile number with valid details
+    cy.get('#downshift-0-toggle-button > div:nth-child(1) > span:nth-child(1) > span:nth-child(1) > svg').click()//drop=down
+    cy.get('[class="sc-fctJkW hdTcNZ"]').eq(0).click()//card number drop-down
+    cy.get('[id="searchCards"]').clear()
+    cy.get('[id="searchCards"]').type('3202{enter}')//card number with valid details
+    cy.get('[id="searchCards"]').clear()
+    cy.get('[id="searchCards"]').type('3200{enter}')//card number with invalid details
+    cy.get('#downshift-0-toggle-button > div:nth-child(1) > span:nth-child(1) > span:nth-child(1) > svg').click()//drop=down
+    cy.get('[class="sc-fctJkW hdTcNZ"]').eq(1).click()//name  drop-down
+    cy.get('[id="searchCards"]').clear()
+    cy.get('[id="searchCards"]').type('darveenaa{enter}')//card number with invalid details
+    cy.get('[id="searchCards"]').clear()
+    cy.get('[id="searchCards"]').type('darveena{enter}')//card number with valid details
+
+    cy.reload()
+    //Search with cardholder name
+
+    cy.get('[id="searchcardHolderName"]').type('darveena{enter}')//valid details
+    cy.get('[id="searchcardHolderName"]').clear()
+    cy.get('[id="searchcardHolderName"]').type('darveena{enter}')
+    cy.get('[id="searchcardHolderName"]').clear()//invalid details
     
-  
-    /*it('Click sub-business button',function(){
-      cy.get('button').contains('Add Sub-business').click()
-    })
-    it('SHould Fill sub-business name',function(){
-      cy.get('[id="businessName"]').type('Sub business')
-      .should('be.visible')
-      .should('be.enabled')
-      .should('have.value', 'Sub business')
-    })
-    it('Should select business type',function(){
-      cy.get('[class="sc-bczRLJ esGJdo"]').eq(1).click()
-      cy.get('[class="sc-grREDI iLndbt"]').eq(1).should('have.text','LLP').click()
-    })
-    it('Should enter business description',function(){
-      cy.get('[id="businessDescription"]').type('Create Sub Business')
-    })
-    it('Should enter primary contact name',function(){
-      cy.get('[id="adminName"]').type('PrimaryContact')
-    })
-    it('Should enter primary contact email',function(){
-      cy.get('[id="adminEmail"]').type('PrimaryContact@mailinator.com')
-    })
-    it('Should enter primary contact mobile number',function(){
-      cy.get('[id="adminMobile"]').type('8787865656')
-    })
-    it('should enter GST Number',function(){
-      cy.get('[id="gst"]').type('22AZSWE4545H1Z2')
-    })
-    it('Should select primary business',function(){
-      cy.get('[class="sc-bZkfAO dmiPjz"]').click()
-      cy.get('li[class="sc-kgUAyh kWqipL"]').click()
-    })
-    it('Should enter the address line 1',function(){
-      cy.get('[id="addressline1"]').type('123C,New Bus Stand')
-    })
-    it('Should enter the address line 2',function(){
-      cy.get('[id="addressline2"]').type('Peravurani')
-    })
-    it('Should enter the landmark',function(){
-        cy.get('[id="landmark"]').type('BNNS Complex')
-    })
-    it('Should enter Pincode',function(){
-      cy.get('[id="pincode"]').type('614804')
-    })
-    it('Should enter city name',function(){
-      cy.get('[id="city"]').type('Chennai')
-    })
-    it('Should enter State name',function(){
-      cy.get('[id="state"]').type('Tamilnadu')
-    })
-    it('Verify details were saved if click submit button',function(){
-      cy.get('.bfmTRx > button:nth-child(2) > div').eq(1).click({force:true})
-      cy.get('[class="sc-gKXOVf pLfFc sc-bUbCnL kHrXFF"]').click()
-    })
-})
-describe('Verify if click submit button without include no details',function(){
-  it('navigate to sub-business list',function(){
-    cy.get('button').contains('Sub Business').click()
-  })
-  it('Click sub-business button',function(){
-    cy.get('button').contains('Add Sub-business').click()
-  })
-  it('Verify details were saved if click submit button',function(){
-    cy.get('.bfmTRx > button:nth-child(2) > div').eq(1).click({force:true})
-    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(0).should('have.text','Enter a valid Sub-business name')
-    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(1).should('have.text','Enter a Description in 10-500 characters')
-    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(2).should('have.text','Enter a valid Primary Contact Name')
-    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(3).should('have.text','Enter a valid Phone Number')
-    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(4).should('have.text','Select a Parent Business')
-    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(5).should('have.text','Enter a valid address between 3-46 characters')
-    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(6).should('have.text','Enter a valid PIN code')
-    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(7).should('have.text','Enter a City name')
-    cy.get('[class="sc-ikZpkk ikoNXp"]').eq(8).should('have.text','Enter a State name')
+    // Search with cardholder mobile number
+
+    cy.get('[id="searchcardHolderMobile"]').type('917010425866{enter}')//valid details
+    cy.get('[id="searchcardHolderMobile"]').clear()
+    cy.get('[id="searchcardHolderMobile"]').type('917010425800{enter}')
+    cy.get('[id="searchcardHolderMobile"]').clear()//invalid details
+
+
+    //Search with KYC Status
+
+    cy.get('[id="searchkycStatus"]').type('completed{enter}')//valid details
+    cy.get('[id="searchkycStatus"]').clear()
+    cy.get('[id="searchkycStatus"]').type('failed{enter}')
+    cy.get('[id="searchkycStatus"]').clear()//invalid details
+
+    //Search with last 4 digit card number
+
+    cy.get('[id="searchcardLast4digits"]').type('3202{enter}')//valid details
+    cy.get('[id="searchcardLast4digits"]').clear()
+    cy.get('[id="searchcardLast4digits"]').type('3200{enter}')//invalid details
+    cy.get('[id="searchcardLast4digits"]').clear()
+
+    
+    //Search with card type
+
+    cy.get('[id="searchcardType"]').type('Digital Only Card{enter}')//Valid details
+    cy.get('[id="searchcardType"]').clear()
+    cy.get('[id="searchcardType"]').type('Personalised Card{enter}')//Invalid details
+    cy.get('[id="searchcardType"]').clear()
+
+    //Search with  issuer program
+
+    cy.get('[id="searchissuerProgram"]').type('YES Bank{enter}')//valid details
+    cy.get('[id="searchissuerProgram"]').clear()
+    cy.get('[id="searchissuerProgram"]').type('SBM Bank{enter')//invalid details
+    cy.get('[id="searchissuerProgram"]').clear()
+    cy.reload()
+    cy.wait(3000)
+
+    //Get Card Details
+    cy.get('div.sc-yeoIj:nth-child(1) > div:nth-child(1) > div:nth-child(7) > button').click({force:true})
+
+    //Load fund with JIT and PREPAID
+    cy.get('button.dFzDzx:nth-child(1)').click()
+    cy.get('[placeholder="Amount"]').eq(0).type('10')
+    cy.get('[placeholder="Amount"]').eq(1).type('10')
+    //Click load fund button with amount
+    cy.get('.gSoJhY').click({force:true});
+    cy.get('[class="sc-kDDrLX hxMGbH"]').should('have.text','✓  Money loaded')
+    cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','Org balance is insufficient for loading money to card')
+    cy.get('button.LjYDp:nth-child(4) > div:nth-child(1) > svg').click()
+
+    //Load fund with no amount
+    cy.get('button.dFzDzx:nth-child(1)').click({force:true})
+    
+    //Click load fund button without amount
+    cy.get('.gSoJhY').click({force:true});
+
+    // Withdraw with success and failure
+
+    cy.get('button').contains('Withdraw').click();
+    cy.get('[class="sc-gicCDI evAvNN"]').eq(0).type('10') 
+    cy.get('[class="sc-gicCDI evAvNN"]').eq(1).type('10')
+    cy.get('button').contains('Withdraw Funds').click();
+    cy.get('.hxMGbH').should('have.text', '✓ Withdraw Success')//SUccess assertion
+    cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','✕ App Balance is lower than given amount')
+    //cy.get('.fIdmrO').should('have.text', '✕ Card withdrawal not possible in issuer: YES')//failure assertion
+    cy.get('button.LjYDp:nth-child(4) > div:nth-child(1) > svg').click()//close the screen
+
+    // Withdraw without amount
+
+    cy.get('button').contains('Withdraw').click();
+    cy.get('button').contains('Withdraw Funds').click();
+    cy.get('button.LjYDp:nth-child(4) > div:nth-child(1) > svg').click()//close the screen
+    
+    //Freeze Card
+
+    cy.get('button').contains('Freeze Card').click()
+
+    //Cancel the freeze dialog box
+
     cy.get('button').contains('Cancel').click()
 
-})
-})
-describe('API Key list',function(){
-  it('Navigate to the API List',function(){
-    cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(2).click()
-  })
-  it('Should Click create Key button',function(){
-    cy.get('button').contains('Create Key').click()
-  })
-  it('Should fill key name',function(){
-    cy.get('[id="keyName"]').type('SuperAdminKey')
-  })
-  it('Should select admin role',function(){
-    cy.wait(3000)
-    cy.get('[id="superAdminId"]').should('be.checked').should('have.value','SUPER_ADMIN')
-    cy.get('[id="cardAdminId"]').should('not.be.checked').should('have.value','CARD_ADMIN')
-    cy.get('[id="readOnlyId"]').should('not.be.checked').should('have.value','READ_ONLY_ADMIN')
-    cy.get('button').contains('Generate Key').click()
-    cy.get('[class="sc-gKXOVf pLfFc sc-bUbCnL kHrXFF"]').click()
+    // Now freeze the card
+    cy.get('button').contains('Freeze Card').click()
+    cy.get('button').contains('Yes, Freeze Card').click()
     
-   })
-  })
-  describe('Verify If click submit button without adding key details',function(){
-    it('Navigate to the API List',function(){
-      cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(2).click()
-    })
-    it('Should Click create Key button',function(){
-      cy.get('button').contains('Create Key').click()
-      cy.get('button').contains('Generate Key').click()
-      cy.get('[class="sc-ikZpkk ikoNXp"]').should('have.text','Enter the name')
-      cy.get('[class="sc-gKXOVf pLfFc sc-bUbCnL kHrXFF"]').click()
-    })
-  })
-//}
-//else{
-  describe('WebHook list',function(){
-    it('Navigate to the WebHook List',function(){
-      cy.get('[class="sc-kDDrLX ivXAPz sc-fWIMVQ fOVFWG"]').eq(3).click()
-    })
-    it('Should click create webhook button',function(){
-      cy.get('button').contains('Create Webhook').click()
-    })
-    it('Should include webhook url',function(){
-      cy.get('[id="webhook-url"]').type('https://webhook.site/e60ced54-f74e-40ea-9b32-85db383a91a0')
-    })
-    it('SHould Create validate webhook type',function(){
-      cy.get('[id="validateTransaction"]').should('be.checked').should('have.value','VALIDATE_TXN')
-      cy.get('button.etUmhU:nth-child(2)').should('be.enabled').click()
-    })
-  })
-//}*/
+
+    // Unfreeze card
+
+    cy.get('button').contains('Unfreeze Card').click()
+
+    //Cancel the Unfreeze dialog box
+
+    cy.get('button').contains('Cancel').click()
+
+    // Now freeze the card
+    cy.get('button').contains('Unfreeze Card').click()
+    cy.get('button').contains('Yes, Unfreeze Card').click()
     
-   
+
+
+  })
+})
