@@ -182,15 +182,18 @@ describe('Should fill all details', function(){
     .should('be.enabled')
     .should('have.value', 'callingname')
 
-    cy.get('[id="mobile-number"]').type('9870009009') // Mobile number
+    const adminmobilenumber = Math.floor(Math.random() * 8000000000) + 1;
+    cy.get('[id="mobile-number"]').type(adminmobilenumber) // Mobile number
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '9870009009')
+    .should('have.value', adminmobilenumber)
 
-    cy.get('[id="email-address"]').type('9870009009@mailinator.com') // Email Address
+    const uuid1 = () => Cypress._.random(0, 1e6)
+    const id1 = uuid1()
+    const AdminEmail = `testname${id1}@mailinator.com`
+    cy.get('[id="email-address"]').type(AdminEmail) // Email Address
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '9870009009@mailinator.com')
     cy.wait(3000)
 
     cy.get('[id="superAdminId"]').should('be.checked') // Super Admin Check Box
@@ -226,10 +229,13 @@ describe('Should fill all details', function(){
     cy.get('button').contains('Sub Business').click() // Sub business button
 
       cy.get('button').contains('Add Sub-business').eq(0).click() // Add sub- business button
-      cy.get('[id="businessName"]').type('Sub business')
+      let Sub_business = (Math.random() + 1).toString(36).substring(7);
+      cy.get('[id="businessName"]').type(Sub_business)
       .should('be.visible')
       .should('be.enabled')
-      .should('have.value', 'Sub business')
+      .should('have.value', Sub_business)
+     
+
       cy.get('[id="displayName"]').type('Display name')
       .should('be.visible')
       .should('be.enabled')
@@ -239,9 +245,19 @@ describe('Should fill all details', function(){
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      cy.get('[id="adminEmail"]').type('6556090997@mailinator.com')
-      cy.get('[id="adminMobile"]').type('6556090997')
-      cy.get('[id="gst"]').type('22VCDFH1255H1Z2')
+      
+      const uuid2 = () => Cypress._.random(0, 1e8)
+      const id2 = uuid2()
+      const suborgemail = `SubOrg${id2}@mailinator.com`
+      cy.get('[id="adminEmail"]').type(suborgemail)
+      const Subadminmobile = Math.floor(Math.random() * 8000000000) + 1;
+      cy.get('[id="adminMobile"]').type(Subadminmobile)
+      const GST = Math.floor(Math.random() * 6000) + 1;
+      const alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
+      const randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)]
+       cy.get('[id="gst"]').type('22'+randomCharacter+'ASXD'+GST+randomCharacter+'1Z5')
+      
+      
       cy.wait(3000)
       cy.get('[class="sc-gicCDI kfezDX"]').click()
       cy.get('li[class="sc-cOFTSb dRVokV"]').eq(0).click()
