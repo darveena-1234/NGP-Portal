@@ -1,10 +1,11 @@
 //import { contains } from 'cypress/types/jquery'
 import { eq } from 'lodash'
-import {base_url} from '../fixtures/config'
+//import {base_url} from '../fixtures/config'
+import NGP from '../Page-Objects/Pages/NGP'
 
 describe('NGP Portal', function(){ 
   it('Verify Card91 business portal URL is loaded successfully',function(){
-      cy.visit(base_url+'/login')})
+      NGP.visit()})
   /*it('Should check correct url',function(){
       cy.url().should('include','login.in')  
        }) */
@@ -181,15 +182,15 @@ describe('Should fill all details', function(){
     .should('be.enabled')
     .should('have.value', 'callingname')
 
-    cy.get('[id="mobile-number"]').type('9363887878') // Mobile number
+    cy.get('[id="mobile-number"]').type('9870009009') // Mobile number
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '9363887878')
+    .should('have.value', '9870009009')
 
-    cy.get('[id="email-address"]').type('9363887878@mailinator.com') // Email Address
+    cy.get('[id="email-address"]').type('9870009009@mailinator.com') // Email Address
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', '9363887878@mailinator.com')
+    .should('have.value', '9870009009@mailinator.com')
     cy.wait(3000)
 
     cy.get('[id="superAdminId"]').should('be.checked') // Super Admin Check Box
@@ -238,9 +239,9 @@ describe('Should fill all details', function(){
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      cy.get('[id="adminEmail"]').type('6011565787@mailinator.com')
-      cy.get('[id="adminMobile"]').type('6011565787')
-      cy.get('[id="gst"]').type('22VCDFH6077H1Z2')
+      cy.get('[id="adminEmail"]').type('6556090997@mailinator.com')
+      cy.get('[id="adminMobile"]').type('6556090997')
+      cy.get('[id="gst"]').type('22VCDFH1255H1Z2')
       cy.wait(3000)
       cy.get('[class="sc-gicCDI kfezDX"]').click()
       cy.get('li[class="sc-cOFTSb dRVokV"]').eq(0).click()
@@ -286,13 +287,12 @@ describe('Should fill all details', function(){
     cy.get('[class="sc-gicCDI kfezDX"]').type('sub')
     cy.get('[role="option"]').eq(0).click()
     cy.get('button').contains('Remove').click()
-    cy.get('[placeholder="Enter amount"]').type('10')
+    cy.get('[placeholder="Enter amount"]').type('1')
     cy.get('.gSoJhY').click()
 
     //Get Sub-business details
-    cy.get('[class="sc-papXJ dcCGwG"]').eq(10).click()
-    //Add money to sub-business
-    cy.get('.LjYDp > div:nth-child(1) > svg').click()
+    cy.get('[class="sc-papXJ dcCGwG"]').eq(15).click()
+    cy.get('[class="sc-gKXOVf LjYDp sc-hlnMnd fFJgHU"]').click()
     //Search sub-business
     cy.get('[id="searchBusiness"]').click()
     cy.get('[id="searchBusiness"]').type('abcde')
@@ -450,18 +450,18 @@ describe('Should fill all details', function(){
      // Name On card
      cy.get('[id="nameOnCard"]').type('Cardname')
      //Mobile number
-     cy.get('[id="mobile"]').type('8378780090')
+     cy.get('[id="mobile"]').type('8003430090')
      //Email
-     cy.get('[id="email"]').type('email@yahoo.com')
+     cy.get('[id="email"]').type('emai1212121l@yahoo.com')
 
      //Select business
 
-     cy.get('#downshift-20-toggle-button').click()
-     cy.get('#downshift-20-item-0').click()
+     cy.get('[class="sc-bczRLJ iyTQdw"]').click()
+     cy.get('[role="option"]').eq(0).click()
 
      //Select cardProgram
-     cy.get('#downshift-21-toggle-button').click()
-     cy.get('#downshift-21-item-0').click()
+     cy.get('[class="sc-bczRLJ esGJdo"]').eq(6).click()
+     cy.get('[role="option"]').eq(0).click()
 
      // Enter WALLET Initial amount
 
