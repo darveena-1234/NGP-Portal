@@ -100,27 +100,12 @@ it('Reload',function(){
 it('Verify if enter valid username',function(){
   cy.wait(5000)
     cy.get('#form-field-email-mobile').clear()
-      cy.get('#form-field-email-mobile')
-       .type('Primeuser-002ddc@mailinator.com')
-       .should('be.visible')
-       .should('be.enabled')
-       .should('have.value', 'Primeuser-002ddc@mailinator.com')
-       .should('have.length', 1);
-})
+      NGP.Email()})
 it('Verify if enter valid Password',function(){
     cy.get('#form-field-password').clear()
-    cy.get('#form-field-password')
-       .type('Test@123')
-       .should('be.visible')
-       .should('be.enabled')
-       .should('have.value', 'Test@123')
-       .should('have.length', 1);
-})
+    NGP.Password()})
 it('Verify the login button',function(){
-  cy.get('.dFzDzx > .sc-papXJ')
-  .should('be.visible')
-  .click();
-})
+  NGP.Login()})
 })
 
 /*it('Navigate through the links using loops', () => {
@@ -172,10 +157,12 @@ describe('Should fill all details', function(){
    cy.wait(3000)
     cy.get('button').contains('Invite Admin').click({force:true})
     //cy.wait(3000)
-    cy.get('[id="full-name"]').type('AdminName') // Admin Name
+    let AdminName = (Math.random() + 1).toString(36).substring(7);
+    cy.get('[id="full-name"]').type(AdminName) // Admin Name
     .should('be.visible')
     .should('be.enabled')
-    .should('have.value', 'AdminName')
+    .should('have.value', AdminName)
+    
     
     cy.get('[id="calling-name"]').type('callingname') // Calling name
     .should('be.visible')
@@ -213,7 +200,7 @@ describe('Should fill all details', function(){
     .should('have.text','Invite Admin').click({force:true}) // Submit button
     cy.wait(2000)
     // Admin without input
-    cy.get('button').contains('Invite Admin').click()
+    cy.get('button').contains('Invite Admin').click({force:true})
     cy.get('button.sc-gKXOVf.gSoJhY')
     .should('have.text','Invite Admin').click({force:true}) 
 
@@ -245,20 +232,24 @@ describe('Should fill all details', function(){
       .should('have.text','LLP').click()
       cy.get('[id="businessDescription"]').type('Create Sub Business')
       cy.get('[id="adminName"]').type('PrimaryContact')
-      
+     
       const uuid2 = () => Cypress._.random(0, 1e8)
       const id2 = uuid2()
       const suborgemail = `SubOrg${id2}@mailinator.com`
       cy.get('[id="adminEmail"]').type(suborgemail)
-      const Subadminmobile = Math.floor(Math.random() * 8000000000) + 1;
+      
+      const Subadminmobile = Math.floor(Math.random() * 9000000000) + 1;
       cy.get('[id="adminMobile"]').type(Subadminmobile)
+      
       const GST = Math.floor(Math.random() * 6000) + 1;
       const alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
       const randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)]
-       cy.get('[id="gst"]').type('22'+randomCharacter+'ASXD'+GST+randomCharacter+'1Z5')
-      
-      
+      cy.get('[id="gst"]').type('22'+randomCharacter+'ASXD'+GST+randomCharacter+'1Z5')
+      .should('be.visible')
+      .should('be.enabled')
+      .should('have.value', '22'+randomCharacter+'ASXD'+GST+randomCharacter+'1Z5')
       cy.wait(3000)
+      
       cy.get('[class="sc-gicCDI kfezDX"]').click()
       cy.get('li[class="sc-cOFTSb dRVokV"]').eq(0).click()
       cy.get('[id="addressline1"]').type('123C,New Bus Stand')
@@ -354,7 +345,7 @@ describe('Should fill all details', function(){
      
      
       //validate transaction
-      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
       cy.get('[id="validateTransaction"]').should('be.checked').should('have.value','VALIDATE_TXN')
       cy.get('button.dFzDzx:nth-child(2)').should('be.enabled').click()
       
@@ -363,7 +354,7 @@ describe('Should fill all details', function(){
       //Create transaction
      
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
       cy.get('[id="createTransaction"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','CREATE_TXN')     
       
@@ -375,7 +366,7 @@ describe('Should fill all details', function(){
       //CARD EVENTS
       
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
       cy.get('[id="cardEvents"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','CARD_EVENTS')     
     
@@ -387,7 +378,7 @@ describe('Should fill all details', function(){
       //SINGLE SIGN ON
       
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
       cy.get('[id="singleSignOn"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','CUSTOMER_AUTH')
       
@@ -397,7 +388,7 @@ describe('Should fill all details', function(){
 
       //kyc-events
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/77dfdba2-df27-4b82-9029-b54255f8c488')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
       cy.get('[id="kycEvents"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','KYC_EVENTS')
        cy.get('button.dFzDzx:nth-child(2)').should('be.enabled').click()
@@ -447,7 +438,7 @@ describe('Should fill all details', function(){
       cy.get('[id="amount"]').eq(0).type('100')
       cy.get('[id="utrNumber"]').type('XXXXR520190109599036XX')
       cy.get('[class="sc-bczRLJ esGJdo"]').eq(2).click()
-      cy.get('button').contains('19').click()
+      cy.get('button').contains('29').click()
       cy.wait(2000)
       cy.get('.gSoJhY > div').eq(0).click()
       cy.get('.behARt').should('be.visible').should('have.text','Your request is received, need to be approved by finance admin')
@@ -468,7 +459,10 @@ describe('Should fill all details', function(){
      //Mobile number
      cy.get('[id="mobile"]').type('8003430090')
      //Email
-     cy.get('[id="email"]').type('emai1212121l@yahoo.com')
+     const uuid3 = () => Cypress._.random(0, 1e8)
+      const id3 = uuid3()
+      const Cardemail = `SubOrg${id3}@mailinator.com`
+      cy.get('[id="email"]').type(Cardemail)
 
      //Select business
 
@@ -491,7 +485,7 @@ describe('Should fill all details', function(){
      cy.get('[id="address.pincode"]').type('614804')
      cy.get('[id="address.city"]').type('Chennai')
      cy.get('[id="address.state"]').type('Tamilnadu')
-     cy.get('button').contains('Issue Card').click()
+    cy.get('button').contains('Issue Card').click()
     cy.get('.LjYDp > div:nth-child(1) > svg').click()
     cy.reload()
     cy.get('[id="searchCards"]').type('7010425866{enter}')//Mobile number with valid details
