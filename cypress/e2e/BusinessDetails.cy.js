@@ -241,7 +241,7 @@ describe('Should fill all details', function(){
       const Subadminmobile = Math.floor(Math.random() * 9000000000) + 1;
       cy.get('[id="adminMobile"]').type(Subadminmobile)
       
-      const GST = Math.floor(Math.random() * 6000) + 1;
+      const GST = Math.floor(Math.random() * 9000) + 1;
       const alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
       const randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)]
       cy.get('[id="gst"]').type('22'+randomCharacter+'ASXD'+GST+randomCharacter+'1Z5')
@@ -465,8 +465,8 @@ describe('Should fill all details', function(){
       cy.get('[id="email"]').type(Cardemail)
 
      //Select business
-
-     cy.get('[class="sc-bczRLJ iyTQdw"]').click()
+    
+     cy.get('[class="sc-papXJ dcCGwG"]').eq(13).click()
      cy.get('[role="option"]').eq(0).click()
 
      //Select cardProgram
