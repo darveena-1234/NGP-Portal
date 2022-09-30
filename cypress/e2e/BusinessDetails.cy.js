@@ -17,9 +17,7 @@ describe('NGP Portal', function(){
   })
   it('Verify if enter invalid username',function(){
       //cy.exec('npm run db:reset && npm run db:seed')// reset and seed the database prior to every test
-      cy.get('#form-field-email-mobile').clear()
-      .type('testuser123@mailinator')
-      .should('have.value', 'testuser123@mailinator')
+      NGP.Invalid_UserName()
       cy.get('.sc-bZkfAO').should('have.text', 'Enter a valid email or mobile number')
 }) 
   
@@ -55,9 +53,9 @@ it('verify if OTP not entered',function(){
 it('verify if enter incorrect OTP',function(){
   cy.get('#form-field-email-mobile').clear()
   cy.get('#form-field-email-mobile')
-  .type('6281288256')
-  .should('have.value', '6281288256')
-  let a="OTP retries"
+  .type('7010425866')
+  .should('have.value', '7010425866')
+  let a="B"
   if (a=="OTP retries"){
     cy.get('.sc-bZkfAO').should('contains.text', 'Retry attempts exceeded. Please try after some time')
   }else{
@@ -70,7 +68,7 @@ it('verify if enter incorrect OTP',function(){
   cy.get('[aria-label="OTP Input 6"]').type('1')
  cy.get('button').contains('Verify OTP').click()
   cy.wait(1000)
-  cy.get('p.sc-kDDrLX:nth-child(3)').should('have.text', 'Incorrect OTP for the mobile num 916281288256 in verifying login otp')}
+  cy.get('p.sc-kDDrLX:nth-child(3)').should('have.text', 'Incorrect OTP for the mobile num 917010425866 in verifying login otp')}
 })
 it('verify if user enter invalid password more than three time',function(){
   cy.get('#form-field-email-mobile').clear()
@@ -345,7 +343,7 @@ describe('Should fill all details', function(){
      
      
       //validate transaction
-      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/3331c7c9-4875-48d9-a28c-7370a5aba0f4')
       cy.get('[id="validateTransaction"]').should('be.checked').should('have.value','VALIDATE_TXN')
       cy.get('button.dFzDzx:nth-child(2)').should('be.enabled').click()
       
@@ -354,7 +352,7 @@ describe('Should fill all details', function(){
       //Create transaction
      
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/3331c7c9-4875-48d9-a28c-7370a5aba0f4')
       cy.get('[id="createTransaction"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','CREATE_TXN')     
       
@@ -366,7 +364,7 @@ describe('Should fill all details', function(){
       //CARD EVENTS
       
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/3331c7c9-4875-48d9-a28c-7370a5aba0f4')
       cy.get('[id="cardEvents"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','CARD_EVENTS')     
     
@@ -378,7 +376,7 @@ describe('Should fill all details', function(){
       //SINGLE SIGN ON
       
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/3331c7c9-4875-48d9-a28c-7370a5aba0f4')
       cy.get('[id="singleSignOn"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','CUSTOMER_AUTH')
       
@@ -388,7 +386,7 @@ describe('Should fill all details', function(){
 
       //kyc-events
       cy.get('button').contains('Create Webhook').click()
-      cy.get('[id="webhook-url"]').type('https://webhook.site/d9ba1ba6-0b88-46d1-b1a5-7884a307f253')
+      cy.get('[id="webhook-url"]').type('https://webhook.site/3331c7c9-4875-48d9-a28c-7370a5aba0f4')
       cy.get('[id="kycEvents"]').should('not.be.visible') // Passes
       .check({ force: true }).should('be.checked').should('have.value','KYC_EVENTS')
        cy.get('button.dFzDzx:nth-child(2)').should('be.enabled').click()
@@ -438,7 +436,7 @@ describe('Should fill all details', function(){
       cy.get('[id="amount"]').eq(0).type('100')
       cy.get('[id="utrNumber"]').type('XXXXR520190109599036XX')
       cy.get('[class="sc-bczRLJ esGJdo"]').eq(2).click()
-      cy.get('button').contains('29').click()
+      cy.get('button').contains('30').click()
       cy.wait(2000)
       cy.get('.gSoJhY > div').eq(0).click()
       cy.get('.behARt').should('be.visible').should('have.text','Your request is received, need to be approved by finance admin')
@@ -466,17 +464,17 @@ describe('Should fill all details', function(){
 
      //Select business
     
-     cy.get('[class="sc-papXJ dcCGwG"]').eq(13).click()
+     cy.get('[class="sc-gKXOVf kzcTGx sc-fvNpTx hLaalE"]').eq(0).click()
      cy.get('[role="option"]').eq(0).click()
 
      //Select cardProgram
-     cy.get('[class="sc-bczRLJ esGJdo"]').eq(6).click()
-     cy.get('[role="option"]').eq(0).click()
+     cy.get('[class="sc-gKXOVf kzcTGx sc-fvNpTx hLaalE"]').eq(1).click()
+     cy.get('[role="option"]').eq(1).click()
 
      // Enter WALLET Initial amount
-
-     cy.get('[class="sc-gicCDI iroSWH"]').eq(0).type('10')
-     cy.get('[class="sc-gicCDI iroSWH"]').eq(1).type('10')
+     
+     cy.get('[id="wallet1"]').type('10')
+     cy.get('[id="WalletCreation"]').type('10')
 
      // Address
 
@@ -557,11 +555,11 @@ describe('Should fill all details', function(){
     //Load fund with JIT and PREPAID
     cy.get('button.dFzDzx:nth-child(1)').click()
     cy.get('[placeholder="Amount"]').eq(0).type('10')
-    cy.get('[placeholder="Amount"]').eq(1).type('10')
+    //cy.get('[placeholder="Amount"]').eq(1).type('10')
     //Click load fund button with amount
     cy.get('.gSoJhY').click({force:true});
     cy.get('[class="sc-kDDrLX hxMGbH"]').should('have.text','✓  Money loaded')
-    cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','Org balance is insufficient for loading money to card')
+    //cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','Org balance is insufficient for loading money to card')
     cy.get('button.LjYDp:nth-child(4) > div:nth-child(1) > svg').click()
 
     //Load fund with no amount
@@ -574,10 +572,10 @@ describe('Should fill all details', function(){
 
     cy.get('button').contains('Withdraw').click();
     cy.get('[class="sc-gicCDI evAvNN"]').eq(0).type('10') 
-    cy.get('[class="sc-gicCDI evAvNN"]').eq(1).type('10')
+    //cy.get('[class="sc-gicCDI evAvNN"]').eq(1).type('10')
     cy.get('button').contains('Withdraw Funds').click();
     cy.get('.hxMGbH').should('have.text', '✓ Withdraw Success')//SUccess assertion
-    cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','✕ App Balance is lower than given amount')
+   // cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','✕ App Balance is lower than given amount')
     //cy.get('.fIdmrO').should('have.text', '✕ Card withdrawal not possible in issuer: YES')//failure assertion
     cy.get('button.LjYDp:nth-child(4) > div:nth-child(1) > svg').click()//close the screen
 
