@@ -6,6 +6,7 @@ import NGP from '../Page-Objects/Pages/NGP'
 describe('NGP Portal', function(){ 
   it('Verify Card91 business portal URL is loaded successfully',function(){
       NGP.visit()})
+      
   /*it('Should check correct url',function(){
       cy.url().should('include','login.in')  
        }) */
@@ -236,7 +237,7 @@ describe('Should fill all details', function(){
       const suborgemail = `SubOrg${id2}@mailinator.com`
       cy.get('[id="adminEmail"]').type(suborgemail)
       
-      const Subadminmobile = Math.floor(Math.random() * 9000000000) + 1;
+      const Subadminmobile = Math.floor(Math.random() * 9999999998) + 1;
       cy.get('[id="adminMobile"]').type(Subadminmobile)
       
       const GST = Math.floor(Math.random() * 9000) + 1;
@@ -436,7 +437,7 @@ describe('Should fill all details', function(){
       cy.get('[id="amount"]').eq(0).type('100')
       cy.get('[id="utrNumber"]').type('XXXXR520190109599036XX')
       cy.get('[class="sc-bczRLJ esGJdo"]').eq(2).click()
-      cy.get('button').contains('30').click()
+      cy.get('button').contains('3').click()
       cy.wait(2000)
       cy.get('.gSoJhY > div').eq(0).click()
       cy.get('.behARt').should('be.visible').should('have.text','Your request is received, need to be approved by finance admin')
@@ -558,7 +559,7 @@ describe('Should fill all details', function(){
     //cy.get('[placeholder="Amount"]').eq(1).type('10')
     //Click load fund button with amount
     cy.get('.gSoJhY').click({force:true});
-    cy.get('[class="sc-kDDrLX hxMGbH"]').should('have.text','✓  Money loaded')
+    //cy.get('[class="sc-kDDrLX hxMGbH"]').should('have.text','✓  Money loaded')
     //cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','Org balance is insufficient for loading money to card')
     cy.get('button.LjYDp:nth-child(4) > div:nth-child(1) > svg').click()
 
@@ -574,7 +575,7 @@ describe('Should fill all details', function(){
     cy.get('[class="sc-gicCDI evAvNN"]').eq(0).type('10') 
     //cy.get('[class="sc-gicCDI evAvNN"]').eq(1).type('10')
     cy.get('button').contains('Withdraw Funds').click();
-    cy.get('.hxMGbH').should('have.text', '✓ Withdraw Success')//SUccess assertion
+   // cy.get('.hxMGbH').should('have.text', '✓ Withdraw Success')//SUccess assertion
    // cy.get('[class="sc-bZkfAO fIdmrO"]').should('have.text','✕ App Balance is lower than given amount')
     //cy.get('.fIdmrO').should('have.text', '✕ Card withdrawal not possible in issuer: YES')//failure assertion
     cy.get('button.LjYDp:nth-child(4) > div:nth-child(1) > svg').click()//close the screen

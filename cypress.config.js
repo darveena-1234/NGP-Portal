@@ -11,7 +11,7 @@ module.exports = defineConfig({
   requestTimeout:15000,
   responseTimeout:15000,
   videoCompression: 15,
-  video:true,
+  video:false,
   component: {
     viewportWidth: 500,
     viewportHeight: 500

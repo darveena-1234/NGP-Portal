@@ -19,6 +19,7 @@
     "mochawesome-merge": "^4.2.1"
   },
   "dependencies": {
+    "cypress-xpath": "^2.0.1",
     "mysql": "^2.18.1"
   }
 }
